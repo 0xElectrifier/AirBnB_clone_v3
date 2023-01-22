@@ -24,7 +24,7 @@ def fetch_amenity(amenity_id=None):
             abort(404)
         obj = obj.to_dict()
 
-    return obj
+    return jsonify(obj)
 
 
 @app_views.route('/amenities/<amenity_id>', strict_slashes=False,
@@ -37,6 +37,8 @@ def delete_amenity(amenity_id):
         storage.delete(amenities[key])
     else:
         abort(404)
+
+    return jsonify({}), 200
 
 
 @app_views.route('/amenities', strict_slashes=False,
