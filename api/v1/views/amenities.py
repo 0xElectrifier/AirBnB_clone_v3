@@ -48,7 +48,7 @@ def post_amenity():
     except Exception:
         data = None
     if not data:
-            return "Not a JSON", 400
+        return "Not a JSON", 400
 
     try:
         name = data['name']
@@ -75,7 +75,7 @@ def update_amenity(amenity_id):
     except Exception:
         data = None
     if not data:
-            return "Not a JSON", 400
+        return "Not a JSON", 400
 
     for key, value in data.items():
         if key in ['id', 'created_at', 'updated_at']:
