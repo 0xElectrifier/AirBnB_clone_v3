@@ -18,6 +18,7 @@ app = Flask(__name__)
 
 app.register_blueprint(app_views)
 
+
 @app.teardown_appcontext
 def teardown(exc):
     """An operation to run after every application context"""

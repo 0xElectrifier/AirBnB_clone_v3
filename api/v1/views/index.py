@@ -9,6 +9,7 @@ def app_status():
     """Returns a JSON object, status-OK"""
     return {"status": "OK"}
 
+
 @app_views.route('/stats')
 def app_stats():
     """Returns the number of each objects by type"""
