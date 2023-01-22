@@ -8,7 +8,7 @@ from models import storage
 
 
 @app_views.route('/amenities', strict_slashes=False, methods=["GET"])
-@app_views.route('/amenities/<str:amenity_id>', strict_slashes=False,
+@app_views.route('/amenities/<amenity_id>', strict_slashes=False,
                  methods=["GET"])
 def fetch_amenity(amenity_id=None):
     """Retrieves a list of Amenity objects if @amenity_id is specified
@@ -27,7 +27,7 @@ def fetch_amenity(amenity_id=None):
     return jsonify(obj)
 
 
-@app_views.route('/amenities/<str:amenity_id>', strict_slashes=False,
+@app_views.route('/amenities/<amenity_id>', strict_slashes=False,
                  methods=['DELETE'])
 def delete_amenity(amenity_id):
     """Deletes an Amenity object from database"""
@@ -65,7 +65,7 @@ def post_amenity():
     return jsonify(new_obj.to_dict()), 201
 
 
-@app_views.route('/amenities/<str:amenity_id>', strict_slashes=False,
+@app_views.route('/amenities/<amenity_id>', strict_slashes=False,
                  methods=['PUT'])
 def update_amenity(amenity_id):
     """Makes an HTTP PUT request, to update the Amenity objects in database"""
