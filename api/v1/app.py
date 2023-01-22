@@ -1,29 +1,30 @@
 #!/usr/bin/python3
-"""This is an v1 API module"""
-from flask import Flask, jsonify, make_response
-from models import storage
+"""Create the app object of our flask application
+"""
 from api.v1.views import app_views
+from flask import Blueprint
+from flask import Flask
+from models import storage
 from os import getenv
-from flask_cors import CORS
+
+HBNB_API_HOST = getenv('HBNB_API_HOST')
+HBNB_API_PORT = getenv('HBNB_API_PORT')
+if HBNB_API_HOST is None:
+    HBNB_API_HOST = '0.0.0.0'
+if HBNB_API_PORT is None:
+    HBNB_API_PORT = '5000'
 
 app = Flask(__name__)
+
 app.register_blueprint(app_views)
-CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 
 
 @app.teardown_appcontext
-def close_db(db):
-    """Closes current db session"""
+def teardown(exc):
+    """An operation to run after every application context"""
     storage.close()
 
 
-@app.errorhandler(404)
-def not_found_404(error):
-    """Handles 404 errors"""
-    return make_response(jsonify({"error": "Not found"}), 404)
-
-
 if __name__ == '__main__':
-    host = getenv('HBNB_API_HOST', '0.0.0.0')
-    port = getenv('HBNB_API_PORT', '5000')
-    app.run(host, port, threaded=True)
+    app.run(host=HBNB_API_HOST, port=HBNB_API_PORT, threaded=True)
+>>>>>>> b258970c014407252931e48d3eb2ad1049af2341
