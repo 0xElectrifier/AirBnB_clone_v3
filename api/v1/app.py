@@ -27,4 +27,3 @@ def teardown(exc):
 
 if __name__ == '__main__':
     app.run(host=HBNB_API_HOST, port=HBNB_API_PORT, threaded=True)
->>>>>>> b258970c014407252931e48d3eb2ad1049af2341
