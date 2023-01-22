@@ -18,11 +18,11 @@ def app_stats():
     states = storage.count("State")
     users = storage.count("User")
 
-    return '{\n\
-            "amenities": amenities,\
-            "cities": cities,\
-            "places": places,\
-            "reviews": reviews,\
-            "states": states,\
-            "users": users\
-            }'
+    return {
+            "amenities": amenities,
+            "cities": cities,
+            "places": places,
+            "reviews": reviews,
+            "states": states,
+            "users": users
+            }
