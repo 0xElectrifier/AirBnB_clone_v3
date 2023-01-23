@@ -15,9 +15,8 @@ def fetch_amenity(amenity_id=None):
     or just one object if argument is not none
     """
     if amenity_id is None:
-        obj = storage.all("Amenity")
-        for key, value in obj.items():
-            obj[key] = value.to_dict()
+        obj = storage.all("Amenity").values()
+        obj = [value.to_dict() for value in obj]
     else:
         obj = storage.get("Amenity", amenity_id)
         if obj is None:
