@@ -45,10 +45,7 @@ def delete_amenity(amenity_id):
                  methods=["POST"])
 def post_amenity():
     """Handles post request to the `Amenity` class"""
-    try:
-        data = request.get_json()
-    except Exception:
-        data = None
+    data = request.get_json()
     if not data:
         return "Not a JSON", 400
 
@@ -72,10 +69,7 @@ def update_amenity(amenity_id):
     if obj is None:
         abort(404)
 
-    try:
-        data = request.get_json()
-    except Exception:
-        data = None
+    data = request.get_json()
     if not data:
         return "Not a JSON", 400
 
