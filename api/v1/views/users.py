@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Defines `User` api"""
 from api.v1.views import app_views
-from flask import
+from flask import abort, jsonify, request
 from models import storage
 
 
@@ -62,7 +62,7 @@ def post_user():
 
 @app_views.route('/users/<user_id>', strict_slashes=False,
                  methods=['PUT'])
-def update_amenity(user_id):
+def update_user(user_id):
     """Makes an HTTP PUT request to update a `User` object in database,
     with @user_id
     """
