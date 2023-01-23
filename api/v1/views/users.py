@@ -5,8 +5,8 @@ from flask import abort, jsonify, request
 from models import storage
 
 
-@app_views.route("/users", strict_slashes=False)
-@app_views.route("/users/<user_id>", strict_slashes=False)
+@app_views.route("/users", strict_slashes=False, methods=["GET"])
+@app_views.route("/users/<user_id>", strict_slashes=False, methods=["GET"])
 def fetch_users(user_id=None):
     """Fetches a `User` object with 'id' == @user_id if @user_id is not None,
     otherwise fetches all objects
@@ -27,7 +27,6 @@ def fetch_users(user_id=None):
                  methods=['DELETE'])
 def delete_user(user_id):
     """Deletes a `User` object from database"""
-    key = "Amenity." + amenity_id
     user = storage.get("User", user_id)
     if user is None:
         abort(404)
