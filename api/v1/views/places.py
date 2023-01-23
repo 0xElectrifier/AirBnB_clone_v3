@@ -9,10 +9,15 @@ from models import storage
 def fetch_places(city_id):
     """Returns the list of all `Place` objects of a `City`"""
     places = storage.all("Place").values()
-    places = [place.to_dict() for place in places]
+    places = list(places)
+    places_city = []
+    places = [place for place in places if place.city_id == city_id]
+    """
     for place in places:
-        if not hasattr(place, 'city_id') or place.city_id != city_id:
-            places.remove(place)
+        if place.city_id == city_id:
+            places_city.append(place)
+    """
+    places = [place.to_dict() for place in places]
 
     if len(places) == 0:
         abort(404)
