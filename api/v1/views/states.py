@@ -8,7 +8,7 @@ from models.state import State
 
 
 @app_views.route('/states', strict_slashes=False, methods=['GET'])
-@app_views.route('/states/<state_id>', methods=['GET'])
+@app_views.route('/states/<state_id>', strict_slashes=False, methods=['GET'])
 def states(state_id=None):
     """[GET] Retrieves a list of all State objects"""
     if not state_id:
