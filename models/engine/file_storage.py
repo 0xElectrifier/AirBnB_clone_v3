@@ -82,7 +82,8 @@ class FileStorage:
             obj = self.__objects[key]
         except Exception:
             return
-        return classes[cls](**(obj.to_dict()))
+        # return classes[cls](**(obj.to_dict()))
+        return obj
 
     def count(self, cls=None):
         """Counts the number of objects in storage"""

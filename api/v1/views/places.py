@@ -11,6 +11,7 @@ def fetch_city_places(city_id):
     city = storage.get("City", city_id)
     if city is None:
         abort(404)
+
     return jsonify([place.to_dict() for place in city.places])
 
 
