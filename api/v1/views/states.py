@@ -14,7 +14,7 @@ def states(state_id=None):
     if not state_id:
         objs = [obj.to_dict() for obj in storage.all('State').values()]
     else:
-        objs = storage.get("Amenity", state_id)
+        objs = storage.get("State", state_id)
         if objs is None:
             abort(404)
         obj = obj.to_dict()
