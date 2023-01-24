@@ -17,7 +17,7 @@ def states(state_id=None):
         objs = storage.get("State", state_id)
         if objs is None:
             abort(404)
-        obj = obj.to_dict()
+        objs = objs.to_dict()
     return jsonify(objs)
 
 
