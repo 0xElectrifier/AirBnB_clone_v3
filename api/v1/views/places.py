@@ -56,7 +56,7 @@ def post_place(city_id):
     if storage.get("User", user_id) is None:
         abort(404)
     if data.get('name') is None:
-        return "Missing name"
+        return "Missing name", 400
 
     from models.place import Place
     new_place = Place(**data)
