@@ -5,6 +5,7 @@ from api.v1.views import app_views
 from flask import Blueprint
 from flask import Flask
 from flask import jsonify
+from flask_cors import CORS
 from models import storage
 from os import getenv
 
@@ -16,8 +17,9 @@ if HBNB_API_PORT is None:
     HBNB_API_PORT = '5000'
 
 app = Flask(__name__)
-
 app.register_blueprint(app_views)
+
+cors = CORS(app, resources={r"/api/v1/*": {"origins": "0.0.0.0"}})
 
 
 @app.teardown_appcontext
