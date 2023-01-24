@@ -6,24 +6,12 @@ from models import storage
 
 
 @app_views.route('/cities/<city_id>/places', strict_slashes=False)
-def fetch_places(city_id):
+def fetch_city_places(city_id):
     """Returns the list of all `Place` objects of a `City`"""
-    places = storage.all("Place").values()
-    places = list(places)
-    places_city = []
-    places = [place for place in places if place.city_id == city_id]
-    """
-    for place in places:
-        if place.city_id == city_id:
-            places_city.append(place)
-    """
-    places = [place.to_dict() for place in places]
-
-    if len(places) == 0:
+    city = storage.get("City", city_id)
+    if city is None:
         abort(404)
-
-    return jsonify(places)
-
+    return jsonify([place.to_dict() for place in city.places])
 
 
 @app_views.route('/places/<place_id>', strict_slashes=False)
@@ -53,7 +41,8 @@ def delete_place(places_id):
                  methods=["POST"])
 def post_place(city_id):
     """Handles post request to the `Place` uri"""
-    if storage.get("City", city_id) is None:
+    city = storage.get("City", city_id)
+    if city is None:
         abort(404)
 
     data = request.get_json()
@@ -65,6 +54,8 @@ def post_place(city_id):
         return "Missing user_id", 400
     if storage.get("User", user_id) is None:
         abort(404)
+    if data.get('name') is None:
+        return "Missing name"
 
     from models.place import Place
     new_place = Place(**data)
@@ -73,15 +64,6 @@ def post_place(city_id):
     new_place.save()
 
     return jsonify(new_place.to_dict()), 201
-
-
-"""
- places = storage.all("Place").values()
-for place in places:
-    if place.city_id == city_id:
-        for key, value in data.items():
-            setattr(place, key, value)
-"""
 
 
 @app_views.route('/places/<place_id>', strict_slashes=False,
