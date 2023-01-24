@@ -18,7 +18,6 @@ def states(state_id=None):
         if objs is None:
             abort(404)
         obj = obj.to_dict()
-        
     return jsonify(objs)
 
 
@@ -27,7 +26,7 @@ def states(state_id=None):
 def del_state(state_id):
     """[DELETE] - deletes a state object with specified id"""
 
-    key = "State." + amenity_id
+    key = "State." + state_id
     states = storage.all("State")
     if key in states:
         storage.delete(states[key])
@@ -41,7 +40,7 @@ def del_state(state_id):
 @app_views.route('/states', strict_slashes=False, methods=['POST'])
 def create_state():
     """[POST] - adds a state object"""
-    
+
     data = request.get_json()
     if not data:
         return "Not a JSON", 400
