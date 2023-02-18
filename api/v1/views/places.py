@@ -3,6 +3,7 @@
 from api.v1.views import app_views
 from flask import abort, jsonify, request
 from models import storage
+from os import getenv
 import requests
 
 
@@ -96,12 +97,16 @@ def search_places():
     in the body of the request
     """
     data = request.get_json()
-    if not data:
-        return "Not a JSON", 400
+    if data is None:
+        return "Not a JSON", 401
 
     classes = ["amenities", "cities", "states"]
     result_places = []
-    root_url = 'http://0.0.0.0:5000/api/v1'
+    HBNB_API_PORT = getenv('HBNB_API_PORT')
+    if HBNB_API_PORT is None:
+        HBNB_API_PORT = '5050'
+
+    root_url = 'http://0.0.0.0:{}/api/v1'.format(HBNB_API_PORT)
 
     for key, id_list in data.items():
         if key not in classes:
