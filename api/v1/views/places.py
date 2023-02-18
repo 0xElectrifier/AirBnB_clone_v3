@@ -98,7 +98,7 @@ def search_places():
     """
     data = request.get_json()
     if data is None:
-        return "Not a JSON", 401
+        return "Not a JSON", 400
 
     classes = ["amenities", "cities", "states"]
     result_places = []
